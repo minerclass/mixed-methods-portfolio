@@ -1,0 +1,17 @@
+# Mixed Methods Portfolio
+
+Static GitHub Pages site for Micah J. Miner's mixed methods research portfolio.
+
+## Publishing
+
+This repository is intended to publish from the `main` branch at the repository root.
+
+Live site:
+
+`https://minerclass.github.io/mixed-methods-portfolio/`
+
+## Files
+
+- `index.html` is the GitHub Pages entry point.
+- `style.css` contains the site styles.
+- `script.js` adds mobile navigation and progressive reveal behavior.
