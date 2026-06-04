@@ -1,0 +1,797 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Methodology Alignment Studio</title>
+  <meta name="description" content="Interactive methodology alignment studio for Micah Miner's Merriam-centered qualitative case design with mixed-methods support.">
+  <style>
+    :root {
+      --bg: #071014;
+      --panel: rgba(255, 255, 255, 0.08);
+      --panel-strong: rgba(255, 255, 255, 0.13);
+      --text: #f3f7f5;
+      --muted: #bdd0c9;
+      --line: rgba(255, 255, 255, 0.16);
+      --accent: #52d6b2;
+      --accent-2: #f7c35f;
+      --stake: #38bdf8;
+      --merriam: #7fa7ff;
+      --yin: #f59e0b;
+      --warning: #f87171;
+      --shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+      font-family: Inter, "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 16% 8%, rgba(82, 214, 178, 0.18), transparent 30rem),
+        radial-gradient(circle at 82% 12%, rgba(247, 195, 95, 0.13), transparent 26rem),
+        linear-gradient(135deg, #071014 0%, #10202a 48%, #14151c 100%);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; }
+    button, input { font: inherit; }
+    button:focus-visible, a:focus-visible, input:focus-visible {
+      outline: 3px solid rgba(247, 195, 95, 0.65);
+      outline-offset: 3px;
+    }
+
+    .shell {
+      width: calc(100vw - 32px);
+      max-width: 1180px;
+      margin: 0 auto;
+      min-width: 0;
+    }
+
+    h1, h2, h3, p, a, span, blockquote, td, th {
+      overflow-wrap: anywhere;
+      word-break: normal;
+      white-space: normal;
+    }
+
+    header {
+      padding: 34px 0 22px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(7, 16, 20, 0.72);
+      backdrop-filter: blur(16px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .brand strong {
+      display: block;
+      font-size: 1.02rem;
+      line-height: 1.1;
+    }
+
+    .brand,
+    .topbar > *,
+    .hero > *,
+    .studio > *,
+    .grid > *,
+    .sliders > * {
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    .brand span {
+      display: block;
+      color: var(--muted);
+      font-size: .84rem;
+      margin-top: 3px;
+    }
+
+    nav {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    nav a, .btn {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      min-height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 9px 12px;
+      text-decoration: none;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.04);
+      font-weight: 700;
+      font-size: .9rem;
+    }
+
+    nav a:hover, .btn:hover { color: var(--text); border-color: rgba(82, 214, 178, .55); }
+    .btn.primary { color: #071014; background: var(--accent); border-color: var(--accent); }
+
+    main { padding: 44px 0 70px; }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(300px, .85fr);
+      gap: 24px;
+      align-items: end;
+      margin-bottom: 22px;
+    }
+
+    .eyebrow {
+      color: var(--accent-2);
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-weight: 800;
+      font-size: .76rem;
+      margin: 0 0 13px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.4rem, 6vw, 5.7rem);
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      margin: 20px 0 0;
+      max-width: 820px;
+      color: var(--muted);
+      font-size: clamp(1.02rem, 2vw, 1.22rem);
+    }
+
+    .note {
+      border: 1px solid rgba(82, 214, 178, .35);
+      border-radius: 8px;
+      background: rgba(82, 214, 178, .08);
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .note h2, .panel h2, .card h3 {
+      margin: 0 0 8px;
+      line-height: 1.15;
+    }
+
+    .note p, .card p, .panel p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .studio {
+      display: grid;
+      grid-template-columns: minmax(0, 1.22fr) minmax(330px, .78fr);
+      gap: 18px;
+      align-items: start;
+      margin-top: 26px;
+    }
+
+    .panel, .card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      min-width: 0;
+    }
+
+    .panel { padding: 20px; }
+    .card { padding: 17px; }
+    .stack { display: grid; gap: 16px; }
+    .canvas-wrap {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(0, 0, 0, .22);
+      overflow: hidden;
+      margin-top: 15px;
+      position: relative;
+      min-width: 0;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      aspect-ratio: 5 / 4;
+      cursor: grab;
+    }
+
+    canvas:active { cursor: grabbing; }
+
+    .axis-label {
+      position: absolute;
+      color: rgba(243, 247, 245, .62);
+      font-size: .68rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      background: rgba(7, 16, 20, .78);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 6px;
+      padding: 4px 7px;
+      pointer-events: none;
+    }
+
+    .axis-label.top { top: 8px; left: 50%; transform: translateX(-50%); }
+    .axis-label.bottom { bottom: 8px; left: 50%; transform: translateX(-50%); }
+    .axis-label.left { left: 8px; top: 50%; transform: translateY(-50%) rotate(-90deg); transform-origin: left center; }
+    .axis-label.right { right: 8px; top: 50%; transform: translateY(-50%) rotate(90deg); transform-origin: right center; }
+
+    .sliders {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 17px;
+    }
+
+    label {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--muted);
+      font-size: .78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    input[type="range"] { width: 100%; accent-color: var(--accent); }
+    .scale {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      color: rgba(189, 208, 201, .72);
+      font-size: .72rem;
+    }
+
+    .score-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .score-row strong { display: block; }
+    .score-row span { color: var(--muted); font-size: .88rem; }
+    .score-value { font-weight: 900; }
+    .bar {
+      grid-column: 1 / -1;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.11);
+      overflow: hidden;
+    }
+
+    .bar i {
+      display: block;
+      height: 100%;
+      width: 0%;
+      border-radius: inherit;
+      transition: width .16s ease;
+    }
+
+    .merriam i { background: var(--merriam); }
+    .stake i { background: var(--stake); }
+    .yin i { background: var(--yin); }
+    .warning {
+      border-color: rgba(82, 214, 178, .34);
+      background: rgba(82, 214, 178, .08);
+    }
+
+    .warning.amber { border-color: rgba(245, 158, 11, .48); background: rgba(245, 158, 11, .10); }
+    .warning.red { border-color: rgba(248, 113, 113, .48); background: rgba(248, 113, 113, .10); }
+    .warning.blue { border-color: rgba(56, 189, 248, .48); background: rgba(56, 189, 248, .10); }
+
+    blockquote {
+      margin: 14px 0 0;
+      border-left: 4px solid var(--accent-2);
+      padding: 12px 14px;
+      color: var(--muted);
+      background: rgba(0,0,0,.22);
+      border-radius: 0 8px 8px 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .tag {
+      display: inline-flex;
+      color: #071014;
+      background: var(--accent-2);
+      border-radius: 999px;
+      padding: 4px 8px;
+      font-size: .72rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-bottom: 9px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      color: var(--muted);
+      font-size: .94rem;
+      margin-top: 14px;
+    }
+
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 12px 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th { color: var(--text); }
+    tr:last-child td { border-bottom: 0; }
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (max-width: 930px) {
+      header { position: static; }
+      .topbar, .hero, .studio { grid-template-columns: 1fr; display: grid; }
+      nav { justify-content: flex-start; }
+      .grid, .sliders { grid-template-columns: 1fr; }
+      .axis-label.left, .axis-label.right { display: none; }
+      canvas { min-width: 0; }
+      h1 { font-size: clamp(2.05rem, 12vw, 3rem); }
+      .panel h2, .note h2 { font-size: 1.3rem; }
+      .lead { font-size: 1rem; }
+      h1 { max-width: 12ch; }
+      .lead, .note p, .panel p { max-width: 32ch; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="shell topbar">
+      <div class="brand">
+        <strong>Methodology Alignment Studio</strong>
+        <span>Merriam-centered qualitative case logic with mixed-methods support</span>
+      </div>
+      <nav aria-label="Studio navigation">
+        <a href="../">Mixed Methods Portfolio</a>
+        <a href="#studio">Interactive Studio</a>
+        <a href="#defense">Defense Language</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Dissertation Methodology</p>
+        <h1>Merriam-centered applied case design.</h1>
+        <p class="lead">This studio helps explain why the dissertation is best framed as an applied, bounded, interpretive qualitative case design with qualitative-dominant convergent mixed-methods support. Stake and Yin remain useful comparison lenses, but Merriam supplies the controlling fit.</p>
+      </div>
+      <aside class="note">
+        <h2>Controlling Language</h2>
+        <p><strong>Merriam-centered applied case design</strong> governs the study: the case is K-12 educator and institutional sensemaking about pedagogical friction under conditions of generative AI. Quantitative, learner-perspective, and AI-artifact strands support the qualitative case rather than redefining it.</p>
+      </aside>
+    </section>
+
+    <section class="studio" id="studio" aria-label="Interactive methodology alignment studio">
+      <div class="panel">
+        <h2>Epistemological Coordinate Plane</h2>
+        <p>Move the study node to see how different methodological positions change the committee-facing defense. The default location starts in the Merriam zone because the dissertation is an applied, bounded educational case study.</p>
+        <div class="canvas-wrap">
+          <canvas id="mapCanvas" width="650" height="520" aria-label="Methodology alignment coordinate plane"></canvas>
+          <div class="axis-label top">Holistic / Experiential</div>
+          <div class="axis-label bottom">Structured / Propositional</div>
+          <div class="axis-label left">Constructivist / Interpretive</div>
+          <div class="axis-label right">Postpositivist / Realist</div>
+        </div>
+
+        <div class="sliders">
+          <div>
+            <label for="sliderEpist"><span>Epistemology</span><span id="labelEpist">Pragmatic interpretive</span></label>
+            <input type="range" id="sliderEpist" min="10" max="90" value="32">
+            <div class="scale"><span>Hermeneutic</span><span>Pragmatic</span><span>Realist</span></div>
+          </div>
+          <div>
+            <label for="sliderStruct"><span>Design structure</span><span id="labelStruct">Case-bounded</span></label>
+            <input type="range" id="sliderStruct" min="10" max="90" value="38">
+            <div class="scale"><span>Emergent</span><span>Applied case</span><span>Propositional</span></div>
+          </div>
+        </div>
+        <button class="btn primary" id="resetBtn" type="button">Reset to Merriam fit</button>
+      </div>
+
+      <aside class="stack">
+        <div class="panel">
+          <h2>Alignment Profile</h2>
+          <div class="score-row merriam">
+            <div><strong>Merriam-centered applied case design</strong><span>Bounded, interpretive, applied educational inquiry</span></div>
+            <div class="score-value" id="scoreMerriam">0%</div>
+            <div class="bar"><i id="barMerriam"></i></div>
+          </div>
+          <div class="score-row stake">
+            <div><strong>Stake as naturalistic/experiential comparison</strong><span>Issue-centered, lived, relational case meanings</span></div>
+            <div class="score-value" id="scoreStake">0%</div>
+            <div class="bar"><i id="barStake"></i></div>
+          </div>
+          <div class="score-row yin">
+            <div><strong>Yin as structured/propositional comparison</strong><span>Case propositions, strict convergence, realist logic</span></div>
+            <div class="score-value" id="scoreYin">0%</div>
+            <div class="bar"><i id="barYin"></i></div>
+          </div>
+        </div>
+
+        <div class="panel warning" id="warningPanel" aria-live="polite">
+          <h2 id="warningTitle">Optimized Merriam Alignment</h2>
+          <p id="warningDesc">The study is positioned as an interpretive, applied, bounded case with mixed-methods support.</p>
+        </div>
+
+        <div class="panel" id="defense">
+          <span class="tag">Defense translation</span>
+          <h2 id="closestScholarTitle">Merriam's Interpretive Applied Perspective</h2>
+          <p id="scholarFrictionAnalysis">The study uses a bounded applied case to understand how educators and school-system actors construct meaning around pedagogical friction under generative AI conditions.</p>
+          <blockquote id="citationExample">This study employs an applied, qualitative-dominant case design to produce rich descriptive and thematic analysis of how educators make meaning of pedagogical friction within bounded K-12 institutional contexts.</blockquote>
+        </div>
+      </aside>
+    </section>
+
+    <section class="grid" aria-label="Methodological comparison">
+      <article class="card">
+        <span class="tag">Controlling Fit</span>
+        <h3>Merriam</h3>
+        <p>Best fit for an applied educational case study where the goal is descriptive and thematic understanding of a bounded problem of practice.</p>
+      </article>
+      <article class="card">
+        <span class="tag">Comparison Lens</span>
+        <h3>Stake</h3>
+        <p>Useful for protecting experiential depth and lived meaning, especially for educator narratives and retrospective learner accounts.</p>
+      </article>
+      <article class="card">
+        <span class="tag">Defense Foil</span>
+        <h3>Yin</h3>
+        <p>Useful for explaining what the study is not: a primarily proposition-testing or causal-explanatory case study.</p>
+      </article>
+    </section>
+
+    <section class="panel" style="margin-top:18px;">
+      <h2>Cross-Theoretical Methodological Framework</h2>
+      <p>This comparison keeps the dissertation language precise without overclaiming. The mixed-methods design supports the qualitative case through triangulation, joint displays, and meta-inferences.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Dimension</th>
+            <th>Stake</th>
+            <th>Merriam</th>
+            <th>Yin</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Epistemological stance</td>
+            <td>Naturalistic and experiential</td>
+            <td><strong>Pragmatic interpretive and applied</strong></td>
+            <td>Postpositivist and realist</td>
+          </tr>
+          <tr>
+            <td>Case boundary</td>
+            <td>Flexible issue-centered case</td>
+            <td><strong>Bounded educational system and problem of practice</strong></td>
+            <td>Strictly specified case logic</td>
+          </tr>
+          <tr>
+            <td>Role of framework</td>
+            <td>Sensitizing guide</td>
+            <td><strong>Analytic scaffold for descriptive/thematic inquiry</strong></td>
+            <td>Proposition to test</td>
+          </tr>
+          <tr>
+            <td>Mixed-methods function</td>
+            <td>Contextual enrichment</td>
+            <td><strong>Support for the qualitative-dominant case</strong></td>
+            <td>Strict convergence and corroboration</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <script>
+    const canvas = document.getElementById("mapCanvas");
+    const ctx = canvas.getContext("2d");
+    const sliderEpist = document.getElementById("sliderEpist");
+    const sliderStruct = document.getElementById("sliderStruct");
+    const labelEpist = document.getElementById("labelEpist");
+    const labelStruct = document.getElementById("labelStruct");
+    const scoreMerriam = document.getElementById("scoreMerriam");
+    const scoreStake = document.getElementById("scoreStake");
+    const scoreYin = document.getElementById("scoreYin");
+    const barMerriam = document.getElementById("barMerriam");
+    const barStake = document.getElementById("barStake");
+    const barYin = document.getElementById("barYin");
+    const warningPanel = document.getElementById("warningPanel");
+    const warningTitle = document.getElementById("warningTitle");
+    const warningDesc = document.getElementById("warningDesc");
+    const closestScholarTitle = document.getElementById("closestScholarTitle");
+    const scholarFrictionAnalysis = document.getElementById("scholarFrictionAnalysis");
+    const citationExample = document.getElementById("citationExample");
+    const resetBtn = document.getElementById("resetBtn");
+
+    const scholars = {
+      stake: { x: 120, y: 95, name: "Stake", color: "#38bdf8" },
+      merriam: { x: 210, y: 190, name: "Merriam", color: "#7fa7ff" },
+      yin: { x: 505, y: 410, name: "Yin", color: "#f59e0b" }
+    };
+
+    let myStudy = { x: 210, y: 190, radius: 15 };
+    let isDragging = false;
+
+    function resizeCanvas() {
+      const rect = canvas.getBoundingClientRect();
+      const ratio = window.devicePixelRatio || 1;
+      canvas.width = Math.max(320, Math.round(rect.width * ratio));
+      canvas.height = Math.max(256, Math.round(rect.height * ratio));
+      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+      myStudy.x = getCanvasX(Number(sliderEpist.value));
+      myStudy.y = getCanvasY(Number(sliderStruct.value));
+      draw();
+      calculateAlignments();
+    }
+
+    function logicalWidth() { return canvas.getBoundingClientRect().width; }
+    function logicalHeight() { return canvas.getBoundingClientRect().height; }
+    function getNormalizedX(x) { return (x / logicalWidth()) * 100; }
+    function getNormalizedY(y) { return (y / logicalHeight()) * 100; }
+    function getCanvasX(nx) { return (nx / 100) * logicalWidth(); }
+    function getCanvasY(ny) { return (ny / 100) * logicalHeight(); }
+    function scaledNode(node) { return { x: getCanvasX(node.x / 650 * 100), y: getCanvasY(node.y / 520 * 100), name: node.name, color: node.color }; }
+
+    function updateTextLabels(nx, ny) {
+      labelEpist.textContent = nx < 35 ? "Constructivist" : nx < 65 ? "Pragmatic interpretive" : "Postpositivist";
+      labelStruct.textContent = ny < 35 ? "Emergent" : ny < 65 ? "Case-bounded" : "Propositional";
+    }
+
+    function syncSlidersToNode() {
+      const nx = Math.round(getNormalizedX(myStudy.x));
+      const ny = Math.round(getNormalizedY(myStudy.y));
+      sliderEpist.value = nx;
+      sliderStruct.value = ny;
+      updateTextLabels(nx, ny);
+    }
+
+    function syncNodeToSliders() {
+      myStudy.x = getCanvasX(Number(sliderEpist.value));
+      myStudy.y = getCanvasY(Number(sliderStruct.value));
+      updateTextLabels(Number(sliderEpist.value), Number(sliderStruct.value));
+      draw();
+      calculateAlignments();
+    }
+
+    function draw() {
+      const width = logicalWidth();
+      const height = logicalHeight();
+      ctx.clearRect(0, 0, width, height);
+      ctx.strokeStyle = "rgba(255,255,255,.08)";
+      ctx.lineWidth = 1;
+      for (let x = 0; x < width; x += 40) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, height);
+        ctx.stroke();
+      }
+      for (let y = 0; y < height; y += 40) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(width, y);
+        ctx.stroke();
+      }
+
+      ctx.strokeStyle = "rgba(255,255,255,.18)";
+      ctx.lineWidth = 2;
+      ctx.setLineDash([6, 6]);
+      ctx.beginPath();
+      ctx.moveTo(0, height / 2);
+      ctx.lineTo(width, height / 2);
+      ctx.moveTo(width / 2, 0);
+      ctx.lineTo(width / 2, height);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      const stake = scaledNode(scholars.stake);
+      const merriam = scaledNode(scholars.merriam);
+      const yin = scaledNode(scholars.yin);
+      [stake, merriam, yin].forEach(node => drawConnector(myStudy, node, node.color + "36"));
+      [stake, merriam, yin].forEach(drawScholarNode);
+      drawStudyNode();
+    }
+
+    function drawConnector(from, to, color) {
+      ctx.beginPath();
+      ctx.moveTo(from.x, from.y);
+      ctx.lineTo(to.x, to.y);
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 3;
+      ctx.stroke();
+    }
+
+    function drawScholarNode(node) {
+      ctx.beginPath();
+      ctx.arc(node.x, node.y, 20, 0, Math.PI * 2);
+      ctx.fillStyle = node.color + "24";
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(node.x, node.y, 10, 0, Math.PI * 2);
+      ctx.fillStyle = node.color;
+      ctx.fill();
+      ctx.font = "700 12px Inter, sans-serif";
+      ctx.fillStyle = "#f3f7f5";
+      ctx.textAlign = "center";
+      ctx.fillText(node.name, node.x, node.y - 19);
+    }
+
+    function drawStudyNode() {
+      ctx.beginPath();
+      ctx.arc(myStudy.x, myStudy.y, myStudy.radius + 7, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(247, 195, 95, .18)";
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(myStudy.x, myStudy.y, myStudy.radius, 0, Math.PI * 2);
+      ctx.fillStyle = "#f7c35f";
+      ctx.shadowBlur = 16;
+      ctx.shadowColor = "#f7c35f";
+      ctx.fill();
+      ctx.shadowBlur = 0;
+      ctx.font = "800 10px Inter, sans-serif";
+      ctx.fillStyle = "#071014";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText("STUDY", myStudy.x, myStudy.y);
+      ctx.font = "800 12px Inter, sans-serif";
+      ctx.fillStyle = "#f7c35f";
+      ctx.textBaseline = "alphabetic";
+      ctx.fillText("My Dissertation Space", myStudy.x, myStudy.y - 25);
+    }
+
+    function alignment(node) {
+      const n = scaledNode(node);
+      const dx = myStudy.x - n.x;
+      const dy = myStudy.y - n.y;
+      const maxDist = Math.sqrt(logicalWidth() * logicalWidth() + logicalHeight() * logicalHeight());
+      const score = Math.round(Math.pow(1 - Math.sqrt(dx * dx + dy * dy) / (maxDist * .45), 2) * 100);
+      return Math.max(0, Math.min(100, score));
+    }
+
+    function calculateAlignments() {
+      const m = alignment(scholars.merriam);
+      const s = alignment(scholars.stake);
+      const y = alignment(scholars.yin);
+      scoreMerriam.textContent = m + "%";
+      scoreStake.textContent = s + "%";
+      scoreYin.textContent = y + "%";
+      barMerriam.style.width = m + "%";
+      barStake.style.width = s + "%";
+      barYin.style.width = y + "%";
+      evaluateMethodologicalDefense(m, s, y);
+    }
+
+    function evaluateMethodologicalDefense(m, s, y) {
+      const nx = getNormalizedX(myStudy.x);
+      const ny = getNormalizedY(myStudy.y);
+      warningPanel.className = "panel warning";
+
+      if (nx > 65 && ny < 40) {
+        warningPanel.classList.add("amber");
+        warningTitle.textContent = "Committee Caution: Realist stance without enough structure";
+        warningDesc.textContent = "A postpositivist stance paired with emergent design invites questions about propositions, construct reliability, and why the study is not more Yin-aligned.";
+      } else if (nx < 35 && ny > 65) {
+        warningPanel.classList.add("red");
+        warningTitle.textContent = "Committee Caution: Interpretive stance with proposition-heavy structure";
+        warningDesc.textContent = "A strongly constructivist worldview paired with highly structured propositions can look internally inconsistent. Defend why bounded structure supports, rather than overrides, interpretation.";
+      } else if (nx < 35 && ny < 35) {
+        warningPanel.classList.add("blue");
+        warningTitle.textContent = "Stake-leaning depth";
+        warningDesc.textContent = "This position protects lived experience and meaning, but the dissertation should still explain how it will sustain applied case boundaries and mixed-methods integration.";
+      } else {
+        warningTitle.textContent = "Optimized Merriam applied bounded alignment";
+        warningDesc.textContent = "This is the strongest defense position: interpretive enough for educator sensemaking, bounded enough for committee review, and structured enough for mixed-methods integration.";
+      }
+
+      const dominant = Math.max(m, s, y);
+      if (dominant === s) {
+        closestScholarTitle.textContent = "Stake's Naturalistic Experiential Perspective";
+        scholarFrictionAnalysis.textContent = "Stake helps foreground the lived texture of pedagogical friction: how educators and learners experience authorship, struggle, and accountability as generative AI changes academic work.";
+        citationExample.textContent = "Stake can be used as a comparison lens for preserving experiential depth, but the dissertation should still return to Merriam for the applied bounded case structure.";
+      } else if (dominant === y) {
+        closestScholarTitle.textContent = "Yin's Structured Propositional Perspective";
+        scholarFrictionAnalysis.textContent = "Yin helps clarify what committee readers may expect from a more proposition-driven design: strict convergence, formal logic, and explanatory propositions.";
+        citationExample.textContent = "Yin functions as a defense foil: this study uses structured integration and joint displays, but it is not primarily a proposition-testing case study.";
+      } else {
+        closestScholarTitle.textContent = "Merriam's Interpretive Applied Perspective";
+        scholarFrictionAnalysis.textContent = "Merriam aligns with the dissertation because the study investigates a bounded educational problem of practice and seeks applied, descriptive, thematic understanding of educator and institutional sensemaking.";
+        citationExample.textContent = "This study employs an applied, qualitative-dominant case design to produce rich descriptive and thematic analysis of how educators make meaning of pedagogical friction within bounded K-12 institutional contexts.";
+      }
+    }
+
+    function pointerPosition(event) {
+      const rect = canvas.getBoundingClientRect();
+      const source = event.touches ? event.touches[0] : event;
+      return { x: source.clientX - rect.left, y: source.clientY - rect.top };
+    }
+
+    function isHit(pos) {
+      const dx = pos.x - myStudy.x;
+      const dy = pos.y - myStudy.y;
+      return Math.sqrt(dx * dx + dy * dy) < myStudy.radius + 12;
+    }
+
+    canvas.addEventListener("mousedown", event => {
+      const pos = pointerPosition(event);
+      if (isHit(pos)) isDragging = true;
+    });
+
+    canvas.addEventListener("mousemove", event => {
+      if (!isDragging) return;
+      const pos = pointerPosition(event);
+      myStudy.x = Math.max(myStudy.radius, Math.min(logicalWidth() - myStudy.radius, pos.x));
+      myStudy.y = Math.max(myStudy.radius, Math.min(logicalHeight() - myStudy.radius, pos.y));
+      syncSlidersToNode();
+      draw();
+      calculateAlignments();
+    });
+
+    window.addEventListener("mouseup", () => { isDragging = false; });
+
+    canvas.addEventListener("touchstart", event => {
+      const pos = pointerPosition(event);
+      if (isHit(pos)) {
+        isDragging = true;
+        event.preventDefault();
+      }
+    }, { passive: false });
+
+    canvas.addEventListener("touchmove", event => {
+      if (!isDragging) return;
+      const pos = pointerPosition(event);
+      myStudy.x = Math.max(myStudy.radius, Math.min(logicalWidth() - myStudy.radius, pos.x));
+      myStudy.y = Math.max(myStudy.radius, Math.min(logicalHeight() - myStudy.radius, pos.y));
+      syncSlidersToNode();
+      draw();
+      calculateAlignments();
+      event.preventDefault();
+    }, { passive: false });
+
+    canvas.addEventListener("touchend", () => { isDragging = false; });
+    sliderEpist.addEventListener("input", syncNodeToSliders);
+    sliderStruct.addEventListener("input", syncNodeToSliders);
+    resetBtn.addEventListener("click", () => {
+      sliderEpist.value = 32;
+      sliderStruct.value = 38;
+      syncNodeToSliders();
+    });
+
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+  </script>
+</body>
+</html>
