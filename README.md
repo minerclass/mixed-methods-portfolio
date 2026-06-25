@@ -20,5 +20,6 @@ Live site:
 
 - `index.html` is the GitHub Pages entry point.
 - `methodology-alignment/index.html` is the interactive Methodology Alignment Studio.
+- `memoing-protocol/index.html` is the memoing protocol and researcher-controlled AI-use record (proposal-stage methodology artifact).
 - `style.css` contains the site styles.
 - `script.js` adds mobile navigation and progressive reveal behavior.

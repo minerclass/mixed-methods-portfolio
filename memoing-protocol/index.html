@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Memoing and Researcher-Controlled AI Use</title>
+  <meta name="description" content="A memoing protocol and researcher-controlled AI-use record for a qualitative-dominant convergent mixed methods case study. Proposal-stage methodology artifact.">
+  <style>
+    :root {
+      --bg: #071014;
+      --panel: rgba(255, 255, 255, 0.08);
+      --panel-strong: rgba(255, 255, 255, 0.13);
+      --text: #f3f7f5;
+      --muted: #bdd0c9;
+      --line: rgba(255, 255, 255, 0.16);
+      --accent: #52d6b2;
+      --accent-2: #f7c35f;
+      --warning: #f87171;
+      --shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+      font-family: Inter, "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 16% 8%, rgba(82, 214, 178, 0.18), transparent 30rem),
+        radial-gradient(circle at 82% 12%, rgba(247, 195, 95, 0.13), transparent 26rem),
+        linear-gradient(135deg, #071014 0%, #10202a 48%, #14151c 100%);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; }
+    button, input { font: inherit; }
+    a:focus-visible { outline: 3px solid rgba(247, 195, 95, 0.65); outline-offset: 3px; }
+
+    .shell { width: calc(100vw - 32px); max-width: 1100px; margin: 0 auto; min-width: 0; }
+
+    h1, h2, h3, p, a, span, blockquote, td, th, li {
+      overflow-wrap: anywhere; word-break: normal; white-space: normal;
+    }
+
+    header {
+      padding: 34px 0 22px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(7, 16, 20, 0.72);
+      backdrop-filter: blur(16px);
+      position: sticky; top: 0; z-index: 10;
+    }
+
+    .topbar { display: flex; justify-content: space-between; gap: 18px; align-items: center; }
+    .brand strong { display: block; font-size: 1.02rem; line-height: 1.1; }
+    .brand span { display: block; color: var(--muted); font-size: .84rem; margin-top: 3px; }
+    .brand, .topbar > *, .hero > * { min-width: 0; max-width: 100%; }
+
+    nav { display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+    nav a, .btn {
+      border: 1px solid var(--line); border-radius: 8px; min-height: 42px;
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 9px 12px; text-decoration: none; color: var(--muted);
+      background: rgba(255, 255, 255, 0.04); font-weight: 700; font-size: .9rem;
+    }
+    nav a:hover, .btn:hover { color: var(--text); border-color: rgba(82, 214, 178, .55); }
+    .btn.primary { color: #071014; background: var(--accent); border-color: var(--accent); }
+
+    main { padding: 44px 0 70px; }
+
+    .hero {
+      display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(300px, .85fr);
+      gap: 24px; align-items: end; margin-bottom: 24px;
+    }
+    .eyebrow {
+      color: var(--accent-2); text-transform: uppercase; letter-spacing: .12em;
+      font-weight: 800; font-size: .76rem; margin: 0 0 13px;
+    }
+    h1 { margin: 0; font-size: clamp(2.2rem, 5.4vw, 4.6rem); line-height: 1.02; letter-spacing: 0; }
+    .lead { margin: 20px 0 0; max-width: 820px; color: var(--muted); font-size: clamp(1.02rem, 2vw, 1.2rem); }
+
+    .note {
+      border: 1px solid rgba(247, 195, 95, .4); border-radius: 8px;
+      background: rgba(247, 195, 95, .08); padding: 18px; box-shadow: var(--shadow);
+    }
+    .note h2, .panel h2, .card h3 { margin: 0 0 8px; line-height: 1.15; }
+    .note p, .card p, .panel p { margin: 0; color: var(--muted); }
+    .note p + p, .panel p + p { margin-top: 12px; }
+
+    section.block { margin-top: 22px; }
+    .section-head { margin: 0 0 6px; }
+    .section-sub { color: var(--muted); margin: 0 0 16px; max-width: 760px; }
+
+    .panel, .card {
+      border: 1px solid var(--line); border-radius: 8px; background: var(--panel);
+      box-shadow: var(--shadow); min-width: 0;
+    }
+    .panel { padding: 22px; }
+    .card { padding: 18px; }
+    .panel + .panel { margin-top: 16px; }
+
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+
+    .tag {
+      display: inline-flex; color: #071014; background: var(--accent-2);
+      border-radius: 999px; padding: 4px 9px; font-size: .72rem; font-weight: 900;
+      text-transform: uppercase; letter-spacing: .06em; margin-bottom: 10px;
+    }
+    .tag.teal { background: var(--accent); }
+
+    ul.clean { margin: 8px 0 0; padding-left: 0; list-style: none; color: var(--muted); }
+    ul.clean li { padding: 7px 0; border-bottom: 1px solid var(--line); }
+    ul.clean li:last-child { border-bottom: 0; }
+    ul.clean li strong { color: var(--text); }
+
+    blockquote {
+      margin: 16px 0 0; border-left: 4px solid var(--accent-2); padding: 12px 16px;
+      color: var(--text); background: rgba(0,0,0,.22); border-radius: 0 8px 8px 0; font-size: 1.05rem;
+    }
+
+    table { width: 100%; border-collapse: collapse; color: var(--muted); font-size: .92rem; margin-top: 14px; }
+    th, td { border-bottom: 1px solid var(--line); padding: 11px 10px; text-align: left; vertical-align: top; }
+    th { color: var(--text); }
+    tr:last-child td { border-bottom: 0; }
+
+    .refs td { font-size: .9rem; }
+
+    footer { border-top: 1px solid var(--line); padding: 26px 0 40px; margin-top: 30px; }
+    .copyright { color: var(--muted); font-size: .86rem; }
+
+    @media (max-width: 930px) {
+      header { position: static; }
+      .topbar, .hero { grid-template-columns: 1fr; display: grid; }
+      nav { justify-content: flex-start; }
+      .grid, .grid-4 { grid-template-columns: 1fr; }
+      h1 { font-size: clamp(2.05rem, 11vw, 3rem); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="shell topbar">
+      <div class="brand">
+        <strong>Memoing and Researcher-Controlled AI Use</strong>
+        <span>A reflexivity and transparency record for a Merriam-centered mixed methods case study</span>
+      </div>
+      <nav aria-label="Page navigation">
+        <a href="../">Mixed Methods Portfolio</a>
+        <a href="../methodology-alignment/">Methodology Studio</a>
+        <a href="#types">Memo Types</a>
+        <a href="#example">Worked Example</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Dissertation Methodology</p>
+        <h1>Memoing and researcher-controlled AI use.</h1>
+        <p class="lead">In a study about cognitive offloading and authorship under generative AI, the analytic process must keep human interpretive judgment visible. This page sets out the memoing procedure the dissertation will use and shows how the researcher's own AI-assisted work is documented and held accountable.</p>
+      </div>
+      <aside class="note">
+        <h2>Proposal-stage artifact</h2>
+        <p><strong>No participant data has been collected.</strong> Memoing of participant data begins only after the proposal defense and IRB approval. The materials here describe a planned procedure and document the researcher's own scholarly process, which involves no human subjects.</p>
+      </aside>
+    </section>
+
+    <section class="block" id="types">
+      <h2 class="section-head">Four kinds of memo</h2>
+      <p class="section-sub">Each memo is dated, labeled by type, and linked to the relevant transcript, code, or instrument item, so the record can be sorted and audited. A single memo may serve more than one type.</p>
+      <div class="grid-4">
+        <article class="card">
+          <span class="tag teal">Reflexive</span>
+          <h3>Reflexive and positionality</h3>
+          <p>How the researcher's technoskeptical stance and district technology-leadership role may be shaping attention, interpretation, and rapport. Carries the Chapter One positionality commitments into the analytic record.</p>
+        </article>
+        <article class="card">
+          <span class="tag teal">Analytic</span>
+          <h3>Analytic and code</h3>
+          <p>The development of codes and themes: when an a priori friction or pressure code is applied, refined, split, or found wanting, and especially when an instrument's expected dimension and a participant's account diverge.</p>
+        </article>
+        <article class="card">
+          <span class="tag teal">Methodological</span>
+          <h3>Methodological and procedural</h3>
+          <p>Procedural decisions such as sampling adjustments, protocol sequencing, and choices about what counts as evidence, recorded so each decision can be reconstructed.</p>
+        </article>
+        <article class="card">
+          <span class="tag">AI-use</span>
+          <h3>AI-use and process</h3>
+          <p>The researcher's own AI-assisted scholarly work: what intellectual work was retained, what was delegated, and how outputs were verified. Maintained in tandem with the AI-use audit trail.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="block" id="procedure">
+      <div class="panel">
+        <span class="tag">Procedure</span>
+        <h2>How memos are written and stored</h2>
+        <p>Memos will be written at defined points: after each interview and card sort while impressions are fresh, during first and second cycle coding, and at each integration decision. Each memo will be dated, labeled by type, and linked to the relevant transcript, code, or instrument item, and the memos will be stored with the coded data and retained on the schedule in the data management plan. The contemporaneous raw capture is the methodological record; a worked-up version is acceptable as a readable form only when the raw capture is retained unchanged alongside it.</p>
+        <p>Memoing carries specific analytic weight in this design. The qualitative analysis treats a failure of friction codes and pressure codes to map cleanly as potential evidence that the framework requires revision, and the analytic memo is the place where each such instance is described, weighed, and either reconciled or carried forward as a framework limitation. Negative case analysis is documented through memos that record disconfirming evidence sought and found, including instances in which generative AI preserved or enhanced cognitive struggle rather than bypassing it.</p>
+      </div>
+
+      <div class="panel">
+        <span class="tag">Template</span>
+        <h2>Memo header</h2>
+        <ul class="clean">
+          <li><strong>Memo ID:</strong> sequential, with a phase prefix (for example PD-01 for proposal development, DA-01 for data analysis)</li>
+          <li><strong>Date of raw capture</strong></li>
+          <li><strong>Study phase</strong></li>
+          <li><strong>Memo type or types</strong></li>
+          <li><strong>Primary and secondary chapter connection</strong></li>
+          <li><strong>Linked material:</strong> transcript, code, instrument item, or AI-use audit entry</li>
+          <li><strong>Raw source record:</strong> audio or verbatim transcript location, retained unchanged</li>
+          <li><strong>Status:</strong> raw capture, or worked-up from raw</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="panel">
+        <span class="tag">Integrity</span>
+        <h2>Memoing and the AI-use audit trail</h2>
+        <p>The memo record works in concert with an AI-use audit trail. Where the audit trail logs what assistance was used on a given task, the memos record why the researcher made the interpretive decision that followed. Before any transcript, card sort response, survey export, or document excerpt is entered into an AI tool, identifying information is removed, and each instance of AI-assisted support is documented with date, tool and version, analytic task, data type, input and output identifiers, procedure, researcher action, and rationale. AI tools serve as bounded assistants for organization, comparison, documentation, and quality control, never as autonomous coders, statistical authorities, or independent interpreters. The researcher retains responsibility for coding decisions, theme development, quantitative interpretation, integration verdicts, and final claims.</p>
+      </div>
+    </section>
+
+    <section class="block" id="example">
+      <div class="panel">
+        <span class="tag">Worked example</span>
+        <h2>Researcher-controlled AI use during proposal development</h2>
+        <p>This example documents the researcher's own use of AI systems while drafting the proposal. It involves no human subjects and no participant data. Drafting began with the researcher's own writing. AI systems were then used to question the draft, identify unclear or unsupported claims, notice inconsistencies in scope or voice, and simulate difficult committee questions. Locally maintained instruction files supplied the study's paradigm, design, terminology, and privacy boundaries so the feedback stayed tied to the actual study rather than producing a generic AI-in-education proposal.</p>
+        <p>The systems functioned as critical readers, devil's-advocate interlocutors, comparison tools, and research-discovery aids. When a system recommended a source, that recommendation was treated as a search lead: the source had to be located, read, and verified in its original form before it could support the dissertation. The researcher retained responsibility for the problem statement, research-question hierarchy, case definition, conceptual framework, source selection, citations, interpretation, and final wording. AI-generated responses were never cited as substitutes for the original literature.</p>
+        <blockquote>Agreement among AI systems is not treated as validation. It is treated as a prompt for further examination.</blockquote>
+        <p style="margin-top:16px;">The methodological point is the distribution of intellectual responsibility. AI accelerated feedback and made it easier to compare alternatives and test the clarity of an argument. It did not relieve the researcher of the responsibility to formulate the problem, verify sources, weigh competing interpretations, and stand behind the final claims. A polished product does not by itself demonstrate that the intellectual work occurred, which is also the dissertation's central concern.</p>
+
+        <h3 style="margin-top:20px;">Illustrative AI-use audit entries</h3>
+        <table>
+          <thead>
+            <tr><th>Task</th><th>Material provided</th><th>AI contribution</th><th>Researcher action and verification</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Review research-question scope</td>
+              <td>De-identified proposal text</td>
+              <td>Raised questions about scope and hierarchy</td>
+              <td>Compared suggestions with the study purpose and methods plan; narrowed to three primary questions with supporting strands</td>
+            </tr>
+            <tr>
+              <td>Review claims and source support</td>
+              <td>De-identified chapter excerpts</td>
+              <td>Flagged claims needing stronger support</td>
+              <td>Located and evaluated original sources; claims retained, revised, or removed</td>
+            </tr>
+            <tr>
+              <td>Review structure and voice</td>
+              <td>De-identified draft</td>
+              <td>Identified repetition and unclear transitions</td>
+              <td>Revised selectively; retained final wording responsibility</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="margin-top:14px; font-size:.9rem;">A companion practice was piloted during methods coursework, in which the researcher produced reflexive memos on practice interviews. Those coursework memos are rehearsals of the reflexive interview-memo genre, not dissertation data.</p>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="panel refs">
+        <span class="tag">Methodological sources</span>
+        <h2>References</h2>
+        <table>
+          <tbody>
+            <tr><td><strong>Braun, V., &amp; Clarke, V.</strong> (2006). Using thematic analysis in psychology. <em>Qualitative Research in Psychology, 3</em>(2), 77&ndash;101.</td></tr>
+            <tr><td><strong>Lincoln, Y. S., &amp; Guba, E. G.</strong> (1985). <em>Naturalistic Inquiry</em>. Sage.</td></tr>
+            <tr><td><strong>Merriam, S. B., &amp; Tisdell, E. J.</strong> (2016). <em>Qualitative Research: A Guide to Design and Implementation</em> (4th ed.). Jossey-Bass.</td></tr>
+            <tr><td><strong>Miles, M. B., Huberman, A. M., &amp; Salda&ntilde;a, J.</strong> (2014). <em>Qualitative Data Analysis: A Methods Sourcebook</em> (3rd ed.). Sage.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell">
+      <p class="copyright">&copy; 2026 Micah J. Miner. Proposal-stage methodology artifact. Ed.D. in Curriculum, Advocacy, and Policy, National Louis University.</p>
+    </div>
+  </footer>
+</body>
+</html>
