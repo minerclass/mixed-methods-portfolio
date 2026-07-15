@@ -2,7 +2,7 @@
 
 Static GitHub Pages site for Micah J. Miner's mixed methods research portfolio.
 
-The portfolio includes a public methodology alignment page that explains the study as a Merriam-centered qualitative-dominant convergent mixed methods case study. The bounded case is K-12 educator and institutional sensemaking about pedagogical friction under conditions of generative AI. Quantitative evidence, learner-perspective retrospection, and any AI artifact comparison support the qualitative case rather than redefining it.
+The portfolio includes a public methodology alignment page that explains the study as a constructivist, qualitative-dominant convergent mixed methods inquiry. Interviews and other open-ended evidence provide the qualitative core. Closed-ended survey items and national datasets provide supporting context. Adult university students are participants, and AI-generated texts remain a distinct nonparticipant evidence source.
 
 `https://minerclass.github.io/mixed-methods-portfolio/methodology-alignment/`
 
