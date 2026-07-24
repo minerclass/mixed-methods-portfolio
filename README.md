@@ -2,7 +2,7 @@
 
 Static GitHub Pages site for Micah J. Miner's mixed methods research portfolio.
 
-The portfolio includes a public methodology alignment page that explains the study as a constructivist, qualitative-dominant convergent mixed methods inquiry. Interviews and other open-ended evidence provide the qualitative core. Closed-ended survey items and national datasets provide supporting context. Adult university students are participants, and AI-generated texts remain a distinct nonparticipant evidence source.
+The portfolio includes a public methodology alignment page that explains the study as a constructivist, qualitative-dominant convergent mixed methods inquiry. Interviews and other open-ended evidence provide the qualitative core. Closed-ended survey items and national datasets provide supporting context. Adult university students are participants, and AI-generated texts and agentic artifacts remain a distinct nonparticipant evidence source with at least one bounded, prespecified agentic-artifact task.
 
 `https://minerclass.github.io/mixed-methods-portfolio/methodology-alignment/`
 
