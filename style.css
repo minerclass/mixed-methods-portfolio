@@ -1,10 +1,15 @@
 :root {
-    --bg: #071014;
+    /* Ground, ink, and rules come from the shared ecosystem tokens at
+       https://minerclass.github.io/tokens.css. Each fallback is this page's
+       pre-adoption value, so a failed load changes nothing. The translucent
+       panels stay local: they are glass over the ground, not a solid surface. */
+    --bg: var(--mjm-bg, #071014);
     --panel: rgba(255, 255, 255, 0.08);
     --panel-strong: rgba(255, 255, 255, 0.13);
-    --text: #f3f7f5;
-    --muted: #bdd0c9;
-    --line: rgba(255, 255, 255, 0.16);
+    --text: var(--mjm-ink, #f3f7f5);
+    --muted: var(--mjm-muted, #bdd0c9);
+    --line: var(--mjm-line, rgba(255, 255, 255, 0.16));
+    --mjm-accent: var(--mjm-teal, #52d6b2);
     --accent: #52d6b2;
     --accent-2: #f7c35f;
     --accent-3: #7fa7ff;
@@ -775,7 +780,10 @@ footer {
 }
 
 .tag-qual { background: rgba(82, 214, 178, 0.18); color: var(--accent); }
-.tag-quan { background: rgba(127, 167, 255, 0.18); color: var(--accent-3); }
+/* The quan tag sits on its own 18% blue tint over the panel, where --accent-3
+   (#7fa7ff) measured 4.19 and failed AA. Lifted to #a3c1ff, which measures 5.48
+   on that composite. The qual and integration tags pass at 5.15 and 5.58. */
+.tag-quan { background: rgba(127, 167, 255, 0.18); color: #a3c1ff; }
 .tag-int  { background: rgba(247, 195, 95, 0.18); color: var(--accent-2); }
 
 .jd-legend {

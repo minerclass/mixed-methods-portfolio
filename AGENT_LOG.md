@@ -19,6 +19,27 @@ here, in the repository, not in a local file.
 
 ---
 
+## 2026-08-31 - Adopt the shared tokens, and fix a contrast failure in the joint display
+
+**Token adoption.** Links the shared token file and points `--bg`, `--text`, `--muted`,
+and `--line` at it with pre-adoption fallbacks. The translucent glass panels stay local:
+they are tinted overlays on the ground, not solid surfaces, so they should not become one.
+
+**Contrast fix, self-inflicted.** The joint display added earlier today styles its strand
+tags as coloured text on an 18% tint of the same colour. Measured against the real
+composite (`--bg` plus the 5% header wash plus the 8% panel plus the 18% tint), the quan
+tag measured **4.19** and failed AA. Lifted its text to `#a3c1ff`, which measures **5.48**
+on that composite. The qual and integration tags already passed at 5.15 and 5.58 and were
+left alone.
+
+**A note on measurement.** An automated probe initially reported this tag at 3.52 against a
+*light* backdrop on a dark page. That was the probe resolving the backdrop through a
+gradient and falling through to white. The failure was real but the number was not; the
+composite was recomputed by hand from the actual layer stack. Treat any contrast figure
+taken through a gradient ancestor with suspicion.
+
+---
+
 ## 2026-08-31 - Interactive joint display
 
 **Context.** A read-only audit of the Tier 2-4 repositories found this repo to be the
