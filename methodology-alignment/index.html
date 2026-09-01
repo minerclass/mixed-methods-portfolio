@@ -5,14 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Methodology Alignment Studio</title>
   <meta name="description" content="Methodology alignment studio for Micah Miner's constructivist qualitative-dominant convergent mixed methods study.">
+  <link rel="stylesheet" href="https://minerclass.github.io/tokens.css">
   <style>
     :root {
-      --bg: #071014;
+      /* Ground, ink and rules from the shared ecosystem tokens with
+         pre-adoption fallbacks. The teal/amber accents stay local. */
+      --bg: var(--mjm-bg, #071014);
       --panel: rgba(255, 255, 255, 0.08);
       --panel-strong: rgba(255, 255, 255, 0.13);
-      --text: #f3f7f5;
-      --muted: #bdd0c9;
-      --line: rgba(255, 255, 255, 0.16);
+      --text: var(--mjm-ink, #f3f7f5);
+      --muted: var(--mjm-muted, #bdd0c9);
+      --line: var(--mjm-line, rgba(255, 255, 255, 0.16));
+      --mjm-accent: var(--mjm-teal, #52d6b2);
       --accent: #52d6b2;
       --accent-2: #f7c35f;
       --constructivist: #7fa7ff;
