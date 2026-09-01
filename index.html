@@ -26,6 +26,7 @@
                 <a href="#tertiary">Tertiary Algorithmicity</a>
                 <a href="#framework">Friction Framework</a>
                 <a href="#methodology">Methodology</a>
+                <a href="#joint-display">Joint Display</a>
                 <a href="methodology-alignment/">Methodology Studio</a>
                 <a href="#hub">Resource Hub</a>
             </div>
@@ -229,6 +230,51 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+
+
+    <!-- Interactive joint display. Shows the SHAPE of integration, never results:
+         each integration cell states the question the joint display will ask once
+         data exists. Verdict vocabulary (convergence, expansion, divergence,
+         silence) is the study's own, from Phase 3 above. -->
+    <section id="joint-display" class="content-section">
+        <div class="container">
+            <h2 class="section-title">The <span class="gradient-text">Joint Display</span></h2>
+            <p class="section-subtitle">Where the two strands actually meet. Choose a research question to see what evidence sits on each side, and what the integration step will ask of it.</p>
+
+            <div class="jd-controls" role="group" aria-label="Choose a research question">
+                <button type="button" class="jd-tab" data-rq="rq1" aria-pressed="true">RQ1 &middot; Sensemaking</button>
+                <button type="button" class="jd-tab" data-rq="rq2" aria-pressed="false">RQ2 &middot; Conditions</button>
+                <button type="button" class="jd-tab" data-rq="rq3" aria-pressed="false">RQ3 &middot; Supports</button>
+            </div>
+
+            <p class="jd-question" id="jdQuestion" role="status"></p>
+
+            <div class="jd-scroll" tabindex="0" role="region" aria-label="Joint display table, scrollable horizontally">
+                <table class="jd-table">
+                    <caption class="sr-only">Joint display: qualitative strand, quantitative strand, and the integration question for the selected research question.</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col" class="jd-dim">Focus</th>
+                            <th scope="col" class="jd-qual"><span class="jd-tag tag-qual">QUAL</span> Priority strand</th>
+                            <th scope="col" class="jd-quan"><span class="jd-tag tag-quan">quan</span> Complementary strand</th>
+                            <th scope="col" class="jd-int"><span class="jd-tag tag-int">Integration</span> What the display will ask</th>
+                        </tr>
+                    </thead>
+                    <tbody id="jdBody"></tbody>
+                </table>
+            </div>
+
+            <div class="jd-legend" aria-label="Possible integration outcomes">
+                <span class="jd-legend-label">Possible outcomes, determined only after analysis:</span>
+                <span class="jd-outcome"><b>Convergence</b> both strands point the same way</span>
+                <span class="jd-outcome"><b>Expansion</b> one strand reaches what the other cannot ask</span>
+                <span class="jd-outcome"><b>Divergence</b> the strands disagree</span>
+                <span class="jd-outcome"><b>Silence</b> present in one strand, absent in the other</span>
+            </div>
+
+            <p class="jd-caveat"><strong>This is a structure, not a result.</strong> Every cell describes where evidence will sit and what will be asked of it. The study is at proposal stage with IRB approval pending: no data has been collected, no themes exist yet, and no integration outcome has been determined.</p>
         </div>
     </section>
 
